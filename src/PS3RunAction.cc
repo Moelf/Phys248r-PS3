@@ -74,10 +74,14 @@ PS3RunAction::PS3RunAction()
 
   // Width of Cesium Iodide crystal, either 25 or 50 mm
   m_segment = 0.050*m;
-  m_segment = 0.025*m;
-  G4int nSegments = 1.9*m / m_segment;
+  /* m_segment = 0.025*m; */
+  G4float offset = m_segment / 2 ;
+  G4int nSegments = 1.9*m / m_segment + 1;
   analysisManager->AddNtupleRow();  
-  analysisManager->CreateH2("EdepKTeV","",nSegments,-0.85*m,0.85*m,nSegments,-0.85*m,0.85*m);
+  analysisManager->CreateH2("EdepKTeV","",
+          nSegments,-0.85*m-offset,0.85*m+offset,
+          nSegments,-0.85*m-offset,0.85*m+offset
+          );
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
